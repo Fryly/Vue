@@ -1,0 +1,28 @@
+<template>
+  <div class="search">
+    <img src="./../../../assets/search-icon.svg" alt="search" />
+    <input type="text" name="search" placeholder="Search city" />
+  </div>
+</template>
+
+<style scoped lang="scss">
+@import "@/scss/variables";
+
+.search {
+  display: flex;
+  align-items: center;
+  background: #c7cacc54;
+  padding: 10px;
+  border-radius: 4px;
+  img {
+    width: 25px;
+  }
+  input {
+    border: none;
+    background: none;
+    padding: 5px;
+    outline: none;
+    color: #959899;
+  }
+}
+</style>
