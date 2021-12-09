@@ -2,8 +2,8 @@
   <div class="wrapper">
     <Header />
     <div class="content">
-      <AsideMenu />
-      <ContentWeather />
+      <AsideMenu @addCity="onAddCity" :dataCity="dataCity" />
+      <ContentWeather :tabs="tabs" :dataCity="dataCity" />
     </div>
   </div>
 </template>
@@ -17,7 +17,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  // gap: 20px;
   padding: 20px;
 }
 </style>
@@ -35,5 +34,19 @@ import ContentWeather from "@/components/home/content/Content.vue";
     ContentWeather,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  private tabs: string[] = ["Today", "Week"];
+  private dataCity = [];
+
+  private onAddCity(city) {
+    const data = fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ac1d8d7c748ea7df6345148b4b2c3933`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.dataCity = [data];
+        console.log([data]);
+      });
+  }
+}
 </script>
