@@ -10,6 +10,24 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import Search from "./../search-city/Search.vue";
+import CityContent from "./../city-content/CityContent.vue";
+
+@Component({
+  components: {
+    Search,
+    CityContent,
+  },
+})
+export default class AsideMenu extends Vue {
+  @Prop({ required: true })
+  dataCity!: [];
+
+}
+</script>
+
 <style scoped lang="scss">
 @import "@/scss/variables";
 

@@ -1,8 +1,17 @@
 <template>
   <div class="header-content">
     <nav class="header-content__tabs">
-      <a class="link-tab" href="#">Today</a>
-      <a class="link-tab active-tab" href="#">Week</a>
+      <span
+        v-for="(tab, index) in tabs"
+        :key="index"
+        @click="onActive(tab)"
+        class="link-tab"
+        :class="{
+          'active-tab': tab === activeTab,
+        }"
+      >
+        {{ tab }}
+      </span>
     </nav>
     <div class="header-content__temperature">
       <div class="temperature-c"><span>C</span></div>
@@ -10,6 +19,25 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+
+@Component({
+  components: {},
+})
+export default class HeaderContent extends Vue {
+  @Prop({ required: true })
+  tabs!: string[];
+
+  @Prop({ required: true })
+  activeTab!: string;
+
+  private onActive(tab: string) {
+    this.$emit("onActiveTab", tab);
+  }
+}
+</script>
 
 <style scoped lang="scss">
 @import "@/scss/variables";
@@ -25,6 +53,7 @@
       font-size: 20px;
       color: #959899;
       text-decoration: none;
+      cursor: pointer;
     }
     .link-tab:last-child {
       margin-right: 0;
@@ -35,7 +64,8 @@
   }
   .header-content__temperature {
     display: flex;
-    .temperature-c, .temperature-f {
+    .temperature-c,
+    .temperature-f {
       display: flex;
       cursor: pointer;
       justify-content: center;

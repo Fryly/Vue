@@ -1,9 +1,32 @@
 <template>
   <aside>
-    <Search />
-    <CityContent />
+    <Search @addCity="addCity" />
+    <CityContent :dataCity="dataCity" />
   </aside>
 </template>
+
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import Search from "./../search-city/Search.vue";
+import CityContent from "./../city-content/CityContent.vue";
+
+@Component({
+  components: {
+    Search,
+    CityContent,
+  },
+})
+export default class AsideMenu extends Vue {
+  @Prop({ required: true })
+  dataCity!: [];
+
+  private addCity(city) {
+    this.$emit('addCity', city)
+  }
+
+}
+</script>
+
 
 <style scoped lang="scss">
 @import "@/scss/variables";
@@ -15,20 +38,5 @@ aside {
   border-radius: 5px;
   background: $bg-color;
   padding: 10px;
-  // box-shadow: 8px 0px 16px 0px rgba(0,0,0,0.5);
 }
 </style>
-
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Search from "./../search-city/Search.vue";
-import CityContent from "./../city-content/CityContent.vue";
-
-@Component({
-  components: {
-    Search,
-    CityContent,
-  },
-})
-export default class AsideMenu extends Vue {}
-</script>

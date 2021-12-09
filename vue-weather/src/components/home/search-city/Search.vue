@@ -1,9 +1,30 @@
 <template>
   <div class="search">
     <img src="./../../../assets/search-icon.svg" alt="search" />
-    <input type="text" name="search" placeholder="Search city" />
+    <input
+      type="text"
+      name="search"
+      placeholder="Search city"
+      v-model="search"
+      @keydown.enter="add"
+    />
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component
+export default class Search extends Vue {
+  private search = "";
+
+  private add() {
+    if (this.search.length === 0) return;
+    this.$emit("addCity", this.search);
+    this.search = "";
+  }
+}
+</script>
 
 <style scoped lang="scss">
 @import "@/scss/variables";
@@ -23,6 +44,7 @@
     padding: 5px;
     outline: none;
     color: #959899;
+    width: 100%;
   }
 }
 </style>
