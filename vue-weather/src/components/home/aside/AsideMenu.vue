@@ -18,9 +18,9 @@ import CityContent from "./../city-content/CityContent.vue";
 })
 export default class AsideMenu extends Vue {
   @Prop({ required: true })
-  dataCity!: [];
+  dataCity!: any;
 
-  private addCity(city) {
+  private addCity(city: string) {
     this.$emit('addCity', city)
   }
 

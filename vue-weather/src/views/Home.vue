@@ -36,16 +36,16 @@ import ContentWeather from "@/components/home/content/Content.vue";
 })
 export default class Home extends Vue {
   private tabs: string[] = ["Today", "Week"];
-  private dataCity = [];
+  private dataCity: any = [];
 
-  private onAddCity(city) {
+  private onAddCity(city: string) {
     const data = fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ac1d8d7c748ea7df6345148b4b2c3933`
     )
       .then((response) => response.json())
       .then((data) => {
-        this.dataCity = [data];
-        console.log([data]);
+        this.dataCity = data;
+        console.log(this.dataCity);
       });
   }
 }

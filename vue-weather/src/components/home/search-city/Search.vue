@@ -14,9 +14,15 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-@Component
+@Component({})
 export default class Search extends Vue {
   private search = "";
+
+  mounted() {
+    // this.getCountry();
+  }
+
+  // private getCountry() {}
 
   private add() {
     if (this.search.length === 0) return;
